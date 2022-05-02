@@ -1,0 +1,108 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url("../images/5.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+
+}
+.login-box{
+    display: flex;
+    justify-content: center;
+    align-content: space-around;
+    flex-wrap: wrap;
+    width: 600px;
+    height: 400px;
+    background-color: rgba(0,0,0,0.5);          /*注意颜色的表示方法：透明度*/
+    border:10px;
+    padding: 50px 50px;                         /*更改“登录”和输入框之间的间隙*/
+    border-radius: 20px;
+}
+.login-box h1{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: burlywood;
+    font-size: 70px;
+    font-family:"Sun Yat-sen Hsingshu";
+}
+.login-box .input-box{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /*transform: translateY(-35px);*/
+    /*margin-top: 15px;*/
+}
+.login-box .input-box .input-text{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.login-box .input-box .input-text span{
+    color: burlywood;                              /*更改图标的颜色*/
+    font-size: 30px;                               /*更改图标的大小*/
+    margin-top: 30px;                              /*两图标之间的间隙*/
+}
+.login-box .input-box .input-text input{           /*编辑输入框*/
+    border: 2px;
+    padding: 15px;
+    border-bottom: 1px solid rgb(255, 255, 255);    /*底部实线的大小、颜色*/
+    background-color: #ffffff00;                    /*注意颜色的表示方法：透明度*/
+    margin-top: 15px;                               /*两输入框之间的间隙*/
+
+}
+.login-box .input-box .error-msg p{
+    color: rgba(255, 0, 0, 0.95);
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-left: 15px;
+    font-size: 14px;
+
+}
+
+.login-box .input-box .input-btn button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    margin-top: 15px;                                 /*两输入框之间的间隙*/
+    height: 25px;
+    color: #ffdfbb;
+    background: linear-gradient(150deg,#deb887 0%, #844e00 100%);   /*按钮渐变色*/
+    border-radius: 25px;                                /*按钮边框曲度*/
+    cursor: pointer;                                    /*鼠标样式s*/
+    margin-left: 25px;
+
+
+}
+
+.login-box .input-box .sign-up{
+    width: 100%;
+    margin-top: 30px;
+    justify-content: center;
+    display: flex;
+    color: burlywood;
+    /*pointer-events: none;*/
+    font-family:"Sun Yat-sen Hsingshu";
+
+}
+.login-box .input-box .sign-up a{
+    color: rgba(255, 235, 223, 0.47);
+    text-decoration: none;
+    cursor: pointer;
+}

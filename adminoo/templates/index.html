@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <!--Start Dashboard Content-->
+
+            <div class="row mt-3">
+                <div class="col-12 col-lg-6 col-xl-3">
+                    <div class="card bg-success shadow-none">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <div class="media-body">
+                                    <p class="text-white">图书总数</p>
+                                    <h4 class="text-white line-height-5">89</h4>
+                                </div>
+                                <div class="w-circle-icon rounded-circle border border-white">
+                                    <i class="fa fa-cart-plus text-white"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-xl-3">
+                    <div class="card bg-primary shadow-none">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <div class="media-body">
+                                    <p class="text-white">出版社总数</p>
+                                    <h4 class="text-white line-height-5">12138</h4>
+                                </div>
+                                <div class="w-circle-icon rounded-circle border border-white">
+                                    <i class="fa fa-money text-white"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-xl-3">
+                    <div class="card bg-danger shadow-none">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <div class="media-body">
+                                    <p class="text-white">用户总数</p>
+                                    <h4 class="text-white line-height-5">23451</h4>
+                                </div>
+                                <div class="w-circle-icon rounded-circle border border-white">
+                                    <i class="fa fa-users text-white"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-xl-3">
+                    <div class="card bg-info shadow-none">
+                        <div class="card-body">
+                            <div class="media align-items-center">
+                                <div class="media-body">
+                                    <p class="text-white">作者总数</p>
+                                    <h4 class="text-white line-height-5">3372</h4>
+                                </div>
+                                <div class="w-circle-icon rounded-circle border border-white">
+                                    <i class="fa fa-pie-chart text-white"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--End Row-->
+
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="card bg-transparent shadow-none border border-light-3">
+                        <div class="card-header bg-transparent text-white border-light-3">
+                            图书销量和库存
+                        </div>
+                        <div class="card-body">
+                            <canvas id="dashboard3-chart-1"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="card bg-transparent shadow-none border border-light-3">
+                        <div class="card-header bg-transparent text-white border-light-3">
+                            图书类型占比
+                        </div>
+                        <div class="card-body">
+                            <canvas id="dashboard3-chart-2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div><!--End Row-->
+
+            <div class="row">
+                <div class="col-12 col-lg-12 col-xl-12">
+                    <div class="card bg-transparent shadow-none border border-light-3">
+                        <div class="card-header bg-transparent text-white border-light-3">
+                            <i class="fa fa-area-chart"></i> 最近30天访问量
+                        </div>
+                        <div class="card-body">
+
+                            <canvas id="dashboard3-chart-3" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--End Row-->
+
+
+            <div class="card-header border-0 bg-transparent bg-dark text-white">
+                高销量的图书
+            </div>
+            <div class="table-responsive">
+
+                <table class="table table-dark table-striped shadow-dark"
+                       role="grid" aria-describedby="default-datatable_info">
+                    <thead>
+                    <tr role="row">
+                        <th class="sorting_asc" tabindex="0"
+                            aria-controls="default-datatable" rowspan="1" colspan="1"
+                            aria-sort="ascending"
+                            aria-label="Name: activate to sort column descending"
+                            style="width: 50px;
+                                                    font-size:17px">
+                            <p>图书名称</p>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                            rowspan="1" colspan="1"
+                            aria-label="Position: activate to sort column ascending"
+                            style="width: 100px;font-size:17px"><p>图片</p>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                            rowspan="1" colspan="1"
+                            aria-label="Office: activate to sort column ascending"
+                            style="width: 100px;font-size:17px"><p>图书编号</p>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                            rowspan="1" colspan="1"
+                            aria-label="Office: activate to sort column ascending"
+                            style="width: 100px;font-size:17px"><p>图书销量</p>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                            rowspan="1" colspan="1"
+                            aria-label="Office: activate to sort column ascending"
+                            style="width: 100px;font-size:17px"><p>图书价格</p>
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                            rowspan="1" colspan="1"
+                            aria-label="Office: activate to sort column ascending"
+                            style="width: 100px;font-size:17px"><p>图书评分</p>
+                        </th>
+
+                        <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                            rowspan="1" colspan="1"
+                            aria-label="Office: activate to sort column ascending"
+                            style="width: 100px;font-size:17px"><p>图书库存</p>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr role="row" class="odd">
+                        <td>Python入门</td>
+                         <!-- 使用弹框来显示图书的详情-->
+                        <td>
+                                <img src="{% static "../static/images/books/1984_0.jpg" %}" class="product-img"
+                                     alt="product img">
+                        </td>
+                        <td>000001</td>
+                        <td> 1314</td>
+                        <td> 54.5</td>
+                        <td> 8.9</td>
+                        <td> 1251</td>
+
+
+                    </tr>
+                    <tr role="row" class="odd">
+                        <td>凡人修仙传</td>
+                         <!-- 使用弹框来显示图书的详情-->
+                        <td>
+                                <img src="{% static "../static/images/books/凡人修仙传.jpg" %}" class="product-img"
+                                     alt="product img">
+                        </td>
+                        <td>000032</td>
+                        <td> 3212</td>
+                        <td> 66.2</td>
+                        <td> 9.5</td>
+                        <td> 11231</td>
+
+
+                    </tr>
+                    <tr role="row" class="odd">
+                        <td>遮天</td>
+                         <!-- 使用弹框来显示图书的详情-->
+                        <td>
+                                <img src="{% static "../static/images/books/遮天.jpg" %}" class="product-img"
+                                     alt="product img">
+                        </td>
+                        <td>001523</td>
+                        <td> 2184</td>
+                        <td> 70</td>
+                        <td> 9.7</td>
+                        <td> 21131</td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+                <div class="col-sm-12 col-md-7" style="margin: 20px 380px">
+                    <div class="dataTables_paginate paging_simple_numbers"
+                         id="default-datatable_paginate">
+                        <ul class="pagination pagination-outline-dark">
+
+                            <li class="paginate_button page-item previous "
+                                id="default-datatable_previous">
+                                <a href=""
+                                   aria-controls="default-datatable"
+                                   data-dt-idx="0" tabindex="0"
+                                   class="page-link">上一页</a></li>
+
+                            <li class="paginate_button page-item active"><a
+                                    href=""
+                                aria-controls="default-datatable"
+                                data-dt-idx="1"
+                                tabindex="0"
+                                class="page-link">1</a>
+                            </li>
+                               <li class="paginate_button page-item"><a
+                                    href=""
+                                aria-controls="default-datatable"
+                                data-dt-idx="1"
+                                tabindex="0"
+                                class="page-link">2</a>
+                            </li>    <li class="paginate_button page-item"><a
+                                    href=""
+                                aria-controls="default-datatable"
+                                data-dt-idx="1"
+                                tabindex="0"
+                                class="page-link">3</a>
+                            </li>    <li class="paginate_button page-item"><a
+                                    href=""
+                                aria-controls="default-datatable"
+                                data-dt-idx="1"
+                                tabindex="0"
+                                class="page-link">4</a>
+                            </li>    <li class="paginate_button page-item"><a
+                                    href=""
+                                aria-controls="default-datatable"
+                                data-dt-idx="1"
+                                tabindex="0"
+                                class="page-link">5</a>
+                            </li>    <li class="paginate_button page-item"><a
+                                    href=""
+                                aria-controls="default-datatable"
+                                data-dt-idx="1"
+                                tabindex="0"
+                                class="page-link">6</a>
+                            </li>
+
+
+                            <li class="paginate_button page-item next"
+                                id="default-datatable_next"><a
+                                    href=""
+                                    aria-controls="default-datatable"
+                                    data-dt-idx="7" tabindex="0"
+                                    class="page-link">下一页</a></li>
+
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

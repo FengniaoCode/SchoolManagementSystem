@@ -1,0 +1,662 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% if report_search_result == True %}
+        <!--如果能查询到（不为空：有结果），前端显示报告查询结果-->
+
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card gradient-forest">
+                            <div class="card gradient-forest"><h4 style="color: white">报告列表</h4></div>
+                            <div class="card-body text-center p-5">
+                                <div class="table-responsive">
+                                    <div id="default-datatable_wrapper"
+                                         class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-dark table-striped shadow-dark"
+                                                       role="grid" aria-describedby="default-datatable_info">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting_asc" tabindex="0"
+                                                                aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                                aria-sort="ascending"
+                                                                aria-label="Name: activate to sort column descending"
+                                                                style="width: 50px;
+                                                                       font-size:17px">
+                                                                <p>报告编号</p>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Position: activate to sort column ascending"
+                                                                style="width: 100px;font-size:17px"><p>姓名</p>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Office: activate to sort column ascending"
+                                                                style="width: 100px;font-size:17px"><p>健康码</p>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Office: activate to sort column ascending"
+                                                                style="width: 100px;font-size:17px"><p>年龄</p>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Office: activate to sort column ascending"
+                                                                style="width: 100px;font-size:17px"><p>手机号</p>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Office: activate to sort column ascending"
+                                                                style="width: 100px;font-size:17px"><p>体温</p>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Office: activate to sort column ascending"
+                                                                style="width: 100px;font-size:17px"><p>日期</p>
+                                                            </th>
+        {#                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"#}
+        {#                                                        rowspan="1" colspan="1"#}
+        {#                                                        aria-label="Office: activate to sort column ascending"#}
+        {#                                                        style="width: 100px;font-size:17px"><p>图书评分</p>#}
+        {#                                                    </th>#}
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Office: activate to sort column ascending"
+                                                                style="width: 101px;font-size:17px"><p>身体状况简介</p>
+                                                            </th>
+        {#                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"#}
+        {#                                                        rowspan="1" colspan="1"#}
+        {#                                                        aria-label="Office: activate to sort column ascending"#}
+        {#                                                        style="width: 100px;font-size:17px"><p>图书销量</p>#}
+        {#                                                    </th>#}
+        {#                                                    <th class="sorting" tabindex="0" aria-controls="default-datatable"#}
+        {#                                                        rowspan="1" colspan="1"#}
+        {#                                                        aria-label="Office: activate to sort column ascending"#}
+        {#                                                        style="width: 100px;font-size:17px"><p>图书评论量</p>#}
+        {#                                                    </th>#}
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Office: activate to sort column ascending"
+                                                                style="width: 100px;font-size:17px"><p>家庭住址</p>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Office: activate to sort column ascending"
+                                                                style="width: 100px;font-size:17px"><p>专业</p>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                                rowspan="1" colspan="1"
+                                                                aria-label="Age: activate to sort column ascending"
+                                                                style="width: 100px;font-size:17px"><p>健康上报操作</p>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for report_obj in report_obj_list %}
+                                                        <tr role="row" class="odd">
+                                                            <td class="sorting_1"
+                                                                style="width: 50px">{{ report_obj.report_num }}</td>
+                                                            <td>{{ report_obj.name }}</td>
+                                                            <!-- 使用弹框来显示图书的详情-->
+                                                            <td>
+                                                                <a href="{% static report_obj.image_set.first.img_address.name %}"
+                                                                   data-fancybox="group2"
+                                                                   data-caption="{{ report_obj.name }}">
+                                                                    <img src="{% static report_obj.image_set.first.img_address.name %}"
+                                                                         alt="lightbox"
+                                                                         class="lightbox-thumb img-thumbnail">
+                                                                </a>
+
+                                                            </td>
+        {#                                                    <td>{{ report_obj.report_type }}</td>#}
+                                                            <td>{{ report_obj.report_age }}</td>
+                                                            <td>{{ report_obj.report_phone }}</td>
+                                                            <td>{{ report_obj.report_temperature }}</td>
+                                                            <td>{{ report_obj.report_time }}</td>
+                                                            <td style="width: 100px" >
+                                                                <div class="test" style="width:200px;height:80px;overflow:auto;word-wrap:normal" >{{ report_obj.report_description }}</div>
+                                                            </td>
+        {#                                                    <td>{{ report_obj.report_sales }}</td>#}
+                                                            <td>{{ report_obj.report_address }}</td>
+        {#                                                    <td>{{ report_obj.report_inventory }}</td>#}
+                                                            <td>{{ report_obj.profession.name }}</td>
+                                                            <td>
+                                                                <a href="/adminoo/update_report/?id={{ report_obj.id }}">
+                                                                    <button type="button"
+                                                                            class="btn btn-outline-primary btn-round waves-effect waves-light m-1">
+                                                                        修改
+                                                                    </button>
+                                                                </a>
+                                                                <a href="/adminoo/delete_report/?id={{ report_obj.id }}">
+                                                                    <button type="button"
+                                                                        class="btn btn-outline-danger btn-round waves-effect waves-light m-1"
+                                                                        data-toggle="modal"
+                                                                        data-target="#modal-animation-11">删除
+                                                                    </button>
+                                                                </a>
+
+                                                            </td>
+
+                                                        </tr>
+                                                        {% endfor %}
+
+                                                    </tbody>
+
+                                                </table>
+                                                                        <!--分页-->
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Row-->
+
+
+        </div>
+        <!-- End container-fluid-->
+    {% elif profession_search_result == True %}
+        <!--如果能查询到（不为空：有结果），前端显示专业查询结果-->
+        <div class="content-wrapper">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card gradient-forest">
+                        <div class="card gradient-forest"><h4 style="color: white">专业列表</h4></div>
+                        <div class="card-body text-center p-5">
+                            <div class="table-responsive">
+                                <div id="default-datatable_wrapper"
+                                     class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-dark table-striped shadow-dark">
+                                            <thead>
+                                            <tr role="row" class="odd">
+                                                <th class="sorting_asc" tabindex="0"
+                                                    aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                    aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending"
+                                                    style="width: 140px;
+                                                    font-size:17px">
+                                                    <p>专业id</p>
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column descending"
+                                                    style="width: 225px;font-size:17px"><p>专业名称</p>
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column descending"
+                                                    style="width: 101px;font-size:17px"><p>所属学院</p>
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="default-datatable"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Name: activate to sort column descending"
+                                                    style="width: 26px;font-size:17px"><p>专业操作</p>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                                        <!--列表数据-->
+                                            <tbody>
+                                            {% for profession_obj in profession_obj_list %}
+                                                <tr role="row" class="odd">
+                                                    <td class="sorting_1">{{ profession_obj.id }}</td>
+                                                    <td>{{ profession_obj.name }}</td>
+                                                    <td>{{ profession_obj.college.name }}</td>
+                                                    <td>
+                                                        <a href="/adminoo/update_profession/?id={{ profession_obj.id }}">
+                                                            <button type="button"
+                                                                    class="btn btn-outline-primary btn-round waves-effect waves-light m-1">
+                                                                修改
+                                                            </button>
+                                                        </a>
+                                                        <a href="/adminoo/delete_profession/?id={{ profession_obj.id }}">
+                                                            <button type="button"
+                                                                    class="btn btn-outline-danger btn-round waves-effect waves-light m-1"
+                                                                    data-toggle="modal"
+                                                                    data-target="#modal-animation-11"
+                                                                    id="d1">删除
+                                                            </button>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+
+                                        </table>
+                                                            <!--分页-->
+                                        <div class="col-sm-12 col-md-7" style="margin: 20px 380px">
+                                            <div class="dataTables_paginate paging_simple_numbers"
+                                                 id="default-datatable_paginate">
+                                                <ul class="pagination pagination-outline-dark">
+
+                                                     {% if profession_page_objs.has_previous %}
+                                                        <li class="paginate_button page-item previous "
+                                                            id="default-datatable_previous">
+                                                            <a href="{% url 'adminoo:profession_list' page=profession_page_objs.previous_page_number %}"
+                                                               aria-controls="default-datatable"
+                                                               data-dt-idx="0" tabindex="0"
+                                                               class="page-link">上一页</a></li>
+                                                    {% else %}
+                                                         <li class="paginate_button page-item previous disabled"
+                                                            id="default-datatable_previous">
+                                                             <a href="{% url "adminoo:profession_list" page=1 %}"
+                                                               aria-controls="default-datatable"
+                                                               data-dt-idx="0" tabindex="0"
+                                                               class="page-link">上一页</a>
+                                                        </li>
+                                                     {% endif %}
+                                                {% for foo in page_range %}
+                                                    {% if foo == current_page_num %}
+                                                        <!-- 如果是当前页就高亮显示-->
+                                                       <li class="paginate_button page-item active"><a
+                                                            href="{% url "adminoo:profession_list" page=current_page_num %}"
+                                                            aria-controls="default-datatable"
+                                                            data-dt-idx="1"
+                                                            tabindex="0"
+                                                            class="page-link">{{ current_page_num }}</a>
+                                                        </li>
+                                                    {% else %}
+                                                         <!-- 如果不是当前页就正常显示-->
+                                                    <li class="paginate_button page-item"><a
+                                                            href="{% url "adminoo:profession_list" page=foo %}"
+                                                            aria-controls="default-datatable"
+                                                            data-dt-idx="1"
+                                                            tabindex="0"
+                                                            class="page-link">{{ foo }}</a>
+                                                    </li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if profession_page_objs.has_next %}
+                                                    <li class="paginate_button page-item next"
+                                                        id="default-datatable_next">
+                                                        <a href="{% url "adminoo:profession_list" page=profession_page_objs.next_page_number %}"
+
+                                                           aria-controls="default-datatable"
+                                                           data-dt-idx="7" tabindex="0"
+                                                           class="page-link">下一页</a></li>
+                                                {% else %}
+                                                    <li class="paginate_button page-item next disabled"
+                                                        id="default-datatable_next"><a href="#"
+                                                                                       aria-controls="default-datatable"
+                                                                                       data-dt-idx="7" tabindex="0"
+                                                                                       class="page-link">下一页</a></li>
+                                                {% endif %}
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif teacher_search_result == True %}
+        <!--如果能查询到（不为空：有结果），前端显示负责人查询结果-->
+        <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card gradient-forest">
+                        <div class="card gradient-forest"><h4 style="color: white">负责人列表</h4></div>
+                        <div class="card-body text-center p-5">
+                            <div class="table-responsive">
+                                <div id="default-datatable_wrapper"
+                                     class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-dark table-striped shadow-dark"
+                                                   role="grid" aria-describedby="default-datatable_info">
+                                                <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>负责人工号</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>姓名</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>手机号</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>负责专业</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>负责人操作</p>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for res_dic in teacher_search_result %}
+                                                    <tr role="row" class="odd">
+                                                        <td class="sorting_1">{{ res_dic.teacher_obj.teacher_card }}</td>
+                                                        <td>{{ res_dic.teacher_obj.teacher_name }}</td>
+                                                        <td>{{ res_dic.teacher_obj.teacher_phone }}</td>
+                                                        <td>
+                                                            {% for profession_obj in res_dic.profession_obj_list %}
+{#                                                                {% if forloop.last %}{# 当最后一次循环的时候显示#}
+{#                                                                    {{ book_obj.book_name }}#}
+{#                                                                {% else %}#}
+{#                                                                    {{ book_obj.book_name }}#}
+{#                                                                {% endif %}#}
+                                                                {{ profession_obj.name }}
+                                                            {% endfor %}
+                                                        </td>
+                                                        <td>
+                                                            <a href="/adminoo/update_teacher/?id={{ res_dic.teacher_obj.id }}">
+                                                                <button type="button"
+                                                                        class="btn btn-outline-primary btn-round waves-effect waves-light m-1">
+                                                                    修改
+                                                                </button>
+                                                            </a>
+
+                                                            <a href="/adminoo/delete_teacher/?id={{ res_dic.teacher_obj.id }}">
+                                                                <button type="button"
+                                                                        class="btn btn-outline-danger btn-round waves-effect waves-light m-1"
+                                                                        data-toggle="modal"
+                                                                        data-target="#modal-animation-11">删除
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-------------------------------------------分页--------------------------------------->
+                                    <div class="col-sm-12 col-md-7" style="margin: 1px 300px">
+                                        <div class="dataTables_paginate paging_simple_numbers"
+                                             id="default-datatable_paginate">
+
+                                            <ul class="pagination pagination-outline-dark">
+
+                                                {% if teacher_page_objs.has_previous %}
+                                                    <li class="paginate_button page-item previous "
+                                                        id="default-datatable_previous">
+                                                        <a href='{% url 'adminoo:teacher_list' page=teacher_page_objs.previous_page_number %}'
+                                                           aria-controls="default-datatable"
+                                                           data-dt-idx="0" tabindex="0"
+                                                           class="page-link">上一页</a></li>
+
+                                                {% else %}
+                                                    <li class="paginate_button page-item previous disabled"
+                                                        id="default-datatable_previous">
+                                                        <a href="{% url "adminoo:teacher_list" page=1 %}"
+                                                           aria-controls="default-datatable"
+                                                           data-dt-idx="0" tabindex="0"
+                                                           class="page-link">上一页</a>
+                                                    </li>
+                                                {% endif %}
+                                                {% for foo in page_range %}
+                                                    {% if foo == current_page_num %}
+                                                        <!--                                        如果是当前页就高亮显示-->
+                                                        <li class="paginate_button page-item active"><a
+                                                                href="{% url "adminoo:teacher_list" page=current_page_num %}"
+                                                                aria-controls="default-datatable"
+                                                                data-dt-idx="1"
+                                                                tabindex="0"
+                                                                class="page-link">{{ current_page_num }}</a>
+                                                        </li>
+                                                    {% else %}
+                                                        <!--                                        如果不是当前页就正常显示-->
+                                                        <li class="paginate_button page-item"><a
+                                                                href="{% url "adminoo:teacher_list" page=foo %}"
+                                                                aria-controls="default-datatable"
+                                                                data-dt-idx="1"
+                                                                tabindex="0"
+                                                                class="page-link">{{ foo }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if teacher_page_objs.has_next %}
+                                                    <li class="paginate_button page-item next"
+                                                        id="default-datatable_next">
+                                                        <a href="{% url "adminoo:teacher_list" page=teacher_page_objs.next_page_number %}"
+
+                                                           aria-controls="default-datatable"
+                                                           data-dt-idx="7" tabindex="0"
+                                                           class="page-link">下一页</a></li>
+                                                {% else %}
+                                                    <li class="paginate_button page-item next disabled"
+                                                        id="default-datatable_next"><a href="#"
+                                                                                       aria-controls="default-datatable"
+                                                                                       data-dt-idx="7" tabindex="0"
+                                                                                       class="page-link">下一页</a></li>
+                                                {% endif %}
+
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Row-->
+    </div>
+    {% elif user_search_result == True %}
+        <!--如果能查询到（不为空：有结果），前端显示用户查询结果-->
+        <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card gradient-forest">
+                        <div class="card gradient-forest"><h4 style="color: white">用户列表</h4></div>
+                        <div class="card-body text-center p-5">
+                            <div class="table-responsive">
+                                <div id="default-datatable_wrapper"
+                                     class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="default-datatable"
+                                                   class="table table-dark table-striped shadow-dark"
+                                                   role="grid" aria-describedby="default-datatable_info">
+                                                <thead>
+                                                <tr role="row">
+
+
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>学生学号</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>用户名</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>昵称</p>
+                                                    </th>
+{#                                                    <th class="layui-icon-password" tabindex="2"#}
+{#                                                        aria-controls="default-datatable" rowspan="1" colspan="1"#}
+{#                                                        aria-sort="ascending"#}
+{#                                                        aria-label="Name: activate to sort column descending"#}
+{#                                                        style="width: 50px;#}
+{#                                                    font-size:17px">#}
+{#                                                        <p>密码</p>#}
+{#                                                    </th>#}
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>手机号</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>性别</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>专业</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>注册日期</p>
+                                                    </th>
+                                                    <th class="sorting_asc" tabindex="0"
+                                                        aria-controls="default-datatable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 50px;
+                                                    font-size:17px">
+                                                        <p>用户操作</p>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for user_obj in users_obj_list %}
+                                                    <tr role="row" class="odd">
+                                                        <td class="sorting_1">{{ user_obj.card }}</td>
+                                                        <td>{{ user_obj.name }}</td>
+                                                        <td>{{ user_obj.nickname }}</td>
+{#                                                        <td>{{ user_obj.password }}</td>#}
+                                                        <td>{{ user_obj.phone }}</td>
+                                                        <td>{{ user_obj.sex }}</td>
+                                                        <td>{{ user_obj.profession.name }}</td>
+                                                        <td>{{ user_obj.time }}</td>
+
+                                                        <td>
+                                                            <a href="/adminoo/update_user/?id={{ user_obj.id }}">
+                                                                <button type="button"
+                                                                        class="btn btn-outline-primary btn-round waves-effect waves-light m-1">
+                                                                    修改
+                                                                </button>
+                                                            </a>
+                                                            <a href="/adminoo/delete_user/?id={{ user_obj.id }}">
+                                                                <button type="button"
+                                                                        class="btn btn-outline-danger btn-round waves-effect waves-light m-1"
+                                                                        data-toggle="modal"
+                                                                        data-target="#modal-animation-11">删除
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                <!--分页-->
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Row-->
+    </div>
+
+    {% else %}
+        <!--如果查询不到任何东西，前端显示404页面-->
+        <div id="wrapper">
+
+            <div class="container" style="margin: 20px 310px">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center error-pages">
+                            <h1 class="error-title text-white"> 404</h1>
+                            <h2 class="error-sub-title text-white">查询失败</h2>
+
+                            <p class="error-message text-white text-uppercase">{{ error_msg }}</p>
+
+                            <div class="mt-4">
+                                <a href="/adminoo/add_profession/" class="btn btn-info btn-round shadow-info m-1">返回主页</a>
+                                {#                          <a href="javascript:void();" class="btn btn-info btn-round m-1">Previous Page </a>#}
+                            </div>
+
+
+                            <hr class="w-50 border-light-2">
+                            <hr class="w-50 border-light-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--wrapper-->
+    {% endif %}
+{% endblock %}
+

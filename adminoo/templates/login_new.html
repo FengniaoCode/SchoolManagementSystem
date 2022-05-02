@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+{#    <link rel="stylesheet" href="../static/iconfont/iconfont.css">#}
+    <link rel="stylesheet" href="{% static "../static/iconfont/iconfont.css"  %}">
+    <link rel="stylesheet" href="{% static "../static/css/login-index.css" %}">
+    <!--我们只需要更改这里的链接就可以，上面的incofont.css不用了-->
+    <link rel="stylesheet" href="{% static "https://at.alicdn.com/t/font_3315218_7zvl76rufg3.css" %}">
+    <style>
+        /*更改输入框默认值的字体颜色*/
+        input::-webkit-input-placeholder{
+            color: burlywood;
+        }
+
+    </style>
+    <title>Login</title>
+</head>
+<body>
+<form method="post" autocomplete="off">
+    {% csrf_token %}
+<div class="login-box">
+    <h1>登录</h1>
+    <div class="input-box">
+        <div class="input-text">
+            <span class="iconfont icon-2yonghu"></span>
+            <input type="text" placeholder="输入用户名" name="login_username" >
+        </div>
+{#        <div class="input-text">#}
+{#            <span class="iconfont icon-xingxing"></span>#}
+{#            <input type="text" placeholder="输入昵称" name="login_nickname" >#}
+{#        </div>#}
+
+        <div class="input-text">
+            <span class="iconfont icon-dengluzhuce"></span>
+            <input type="password" placeholder="输入密码" name="login_password">
+        </div>
+        <div class="error-msg">
+            <p>{{ error_msg }}</p>
+        </div>
+        <div class="input-btn">
+            <button type="submit">
+              登录
+            </button>
+
+        </div>
+        <div class="sign-up">
+            <p class="text-muted mb-0">您没有有账户? <a href="/adminoo/register_user/">点击这里注册</a></p>
+        </div>
+    </div>
+</div>
+
+
+</form>
+
+</body>
+</html>

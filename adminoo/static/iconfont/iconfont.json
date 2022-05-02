@@ -1,0 +1,72 @@
+{
+  "id": "3315218",
+  "name": "毕设",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "18020137",
+      "name": "爱心",
+      "font_class": "aixin",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "18020138",
+      "name": "拨打",
+      "font_class": "boda",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "18020177",
+      "name": "星星",
+      "font_class": "xingxing",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "16051474",
+      "name": "昵称",
+      "font_class": "nicheng",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "2675011",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "9974425",
+      "name": "人-增加",
+      "font_class": "ren-zengjia",
+      "unicode": "e706",
+      "unicode_decimal": 59142
+    },
+    {
+      "icon_id": "18020141",
+      "name": "2用户",
+      "font_class": "2yonghu",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "18020144",
+      "name": "登录、注册",
+      "font_class": "dengluzhuce",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "18020190",
+      "name": "增加用户",
+      "font_class": "zengjiayonghu",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card gradient-forest">
+                        <div class="card-body p-5">
+                            <div class="card-title"><h4 style="text-align: center;color:white">修改报告</h4></div>
+                            <hr>
+                            <form action="{% url "adminoo:update_report" %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ report_obj.id }}">
+                                <div class="form-group">
+                                    <label for="input-17" style="color: white">姓名</label>
+                                    <input type="text" required
+                                           class="form-control input-primary my-1" id="input-17"
+                                           name="name" value="{{ report_obj.name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-18" style="color: white">年龄</label>
+                                    <input type="text" required
+                                           class="form-control input-primary my-1" id="input-18"
+                                           name="report_age" value="{{ report_obj.report_age }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-18" style="color: white">家庭住址</label>
+                                    <input type="text" required
+                                           class="form-control input-primary my-1" id="input-18"
+                                           name="report_address" value="{{ report_obj.report_address }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-19" style="color: white">手机号</label>
+                                    <input type="text" required
+                                           class="form-control input-primary my-1" id="input-19"
+                                           name="report_phone" value="{{ report_obj.report_phone }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20" style="color: white">体温</label>
+                                    <input type="text" required
+                                           class="form-control input-primary my-1"
+                                           name="report_temperature" id="input-20" value="{{ report_obj.report_temperature }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20" style="color: white">日期</label>
+                                    <input type="datetime-local" required
+                                           class="form-control input-primary my-1"
+                                           name="report_time" id="input-20" value="{{ report_obj.report_time }}">
+                                </div>
+{#                                <div class="form-group">#}
+{#                                    <label for="input-20" style="color: white">图书销量</label>#}
+{#                                    <input type="number" required#}
+{#                                           class="form-control input-primary my-1"#}
+{#                                           name="report_sales" id="input-20" value="{{ report_obj.report_sales }}">#}
+{#                                </div>#}
+{#                                <div class="form-group">#}
+{#                                    <label for="input-20" style="color: white">图书评论量</label>#}
+{#                                    <input type="number" required#}
+{#                                           class="form-control input-primary my-1"#}
+{#                                           name="comment_nums" id="input-20" value="{{ report_obj.comment_nums }}">#}
+{#                                </div>#}
+{#                                <div class="form-group">#}
+{#                                    <label for="input-20" style="color: white">图书库存</label>#}
+{#                                    <input type="number" required#}
+{#                                           class="form-control input-primary my-1"#}
+{#                                           name="report_inventory" id="input-20" value="{{ report_obj.report_inventory }}">#}
+{#                                </div>#}
+
+                                <div class="form-group">
+                                    <label for="input-20" style="color: white">身体状况简介</label>
+                                    <textarea required class="form-control input-primary my-1"
+                                              id="input-20"
+                                              name="report_description">{{ report_obj.report_description }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-20" style="color: white">专业</label>
+                                    <select name="profession" required
+                                            class="form-control input-primary my-1"
+                                            id="input-20">
+                                        {% for profession in profession_list %}
+                                            <option value="{{ profession.id }}">{{ profession.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <br>
+                                    <br>
+                                    <div class="modal fade" id="modal-animation-9">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content animated wobble">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">确认弹框</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>你确认修改这条数据吗？</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i
+                                                            class="fa fa-times"></i> 关闭
+                                                    </button>
+                                                    <button type="submit" class="btn btn-success"><i
+                                                            class="fa fa-check-square-o"></i> 修改
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button"
+                                                class="btn btn-primary btn-lg btn-block waves-effect waves-light m-1"
+                                                data-toggle="modal" data-target="#modal-animation-9"><i
+                                                class="zmdi zmdi-check-circle"></i>提交
+                                        </button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div><!--End Row-->
+        </div>
+        <!-- End container-fluid-->
+
+    </div>
+
+{% endblock %}

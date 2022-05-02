@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card gradient-forest">
+                        <div class="card-body p-5">
+                            <div class="card-title text-primary"><h4 style="text-align: center;color:white">添加专业</h4>
+                            </div>
+                            <hr>
+                            <form method="post" >
+                                {% csrf_token %}    <!--安全验证-->
+                                <label for="input-20"
+                                       style="color: white">选择学院</label>
+                                <select name="college" required
+                                        class="form-control single-select select2-hidden-accessible"
+                                        id="input-20">
+                                    {% for college in college_list %}
+                                    <option value="{{ college.id }}">{{ college.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="form-group">
+                                    <label for="input-1"
+                                           style="color: white">专业名称</label>
+                                    <input type="text" required class="form-control" id="input-1"
+                                           placeholder="请输入要添加的专业" name="profession_name">
+                                </div>
+{#                                <div class="form-group">#}
+{#                                    <label for="input-1" style="color: white">负责人名称</label>#}
+{#                                    <input type="text" required class="form-control" id="input-1"#}
+{#                                           placeholder="请输入专业负责人的名称" name="profession_teacher">#}
+{#                                </div>#}
+                                <div class="form-group">
+
+                            </div>
+
+
+                                <div class="modal fade" id="modal-animation-14">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated fadeInUp">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">确认弹框</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>你确定要保存数据吗？
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal"><i
+                                                        class="fa fa-times"></i> 关闭
+                                                </button>
+                                                <button type="submit" class="btn btn-success"><i
+                                                        class="fa fa-check-square-o"></i> 保存
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button"
+                                        class="btn btn-primary btn-lg btn-block waves-effect waves-light m-1"
+                                        data-toggle="modal" data-target="#modal-animation-14"><i
+                                        class="zmdi zmdi-check-circle"></i>提交
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

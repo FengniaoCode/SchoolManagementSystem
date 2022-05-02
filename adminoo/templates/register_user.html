@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+{#    <link rel="stylesheet" href="../static/iconfont/iconfont.css">#}
+    <link rel="stylesheet" href={% static "../static/iconfont/iconfont.css"  %}>
+    <link rel="stylesheet" href={% static "../static/css/register-index.css" %}>
+    <!--我们只需要更改这里的链接就可以，上面的incofont.css不用了-->
+    <link rel="stylesheet" href="{% static "https://at.alicdn.com/t/font_3315218_7zvl76rufg3.css" %}">
+    <style>
+        /*更改输入框默认值的字体颜色*/
+        input::-webkit-input-placeholder{
+            color: burlywood;
+        }
+        data
+
+    </style>
+    <title>Login</title>
+</head>
+<body>
+<form method="post" autocomplete="off">
+    {% csrf_token %}
+<div class="login-box">
+    <h1>注册</h1>
+    <div class="input-box">
+        <div class="input-text">
+{#            <span class="iconfont icon-2yonghu"></span>#}
+            <input type="text" placeholder="输入用户名" name="register_username" >
+        </div>
+        <div class="input-text">
+{#            <span class="iconfont icon-xingxing"></span>#}
+            <input type="text" placeholder="输入昵称" name="register_nickname" >
+        </div>
+
+        <div class="input-text">
+{#            <span class="iconfont icon-dengluzhuce"></span>#}
+            <input type="password" placeholder="输入密码" name="register_password">
+        </div>
+        <div class="input-text">
+            <input type="text" placeholder="学号" name="card" >
+        </div>
+        <div class="input-text">
+            <input type="text" placeholder="电话" name="phone" >
+        </div>
+        <div class="input-text" >
+{#            <label>日期</label>#}
+            <input type="datetime-local"  name="time" >
+        </div>
+        <div class="input-text">
+            <select name="profession_id" class="select-data">
+                {% for profession_obj in profession_obj_list %}
+                <option value="{{ profession_obj.id }}">{{ profession_obj.name }}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+        <div class="input-text">
+            <label>性别</label>
+            <select name="sex" class="select-sex">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+        <div class="error-msg">
+            <p>{{ error_msg }}</p>
+        </div>
+
+        <div class="input-btn">
+            <button type="submit">
+              注册
+            </button>
+
+        </div>
+        <div class="sign-up">
+            <p class="text-muted mb-0">您已经有账户? <a href="/adminoo/login/">点击这里登录</a></p>
+        </div>
+    </div>
+</div>
+
+
+</form>
+
+</body>
+</html>
